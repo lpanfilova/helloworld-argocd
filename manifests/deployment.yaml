@@ -17,6 +17,10 @@ spec:
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
+      initContainers:
+        - name: build-and-push
+          image: docker:latest
+          command: ["sh", "-c", "./build-and-push.sh"]
       containers:
         - name: aks-helloworld-argocd
           image: lpanfilovaregistry.azurecr.io/helloworld-argocd:latest
