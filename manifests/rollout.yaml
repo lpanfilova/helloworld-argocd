@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: helloworld
+  namespace: helloworld
+  labels:
+    app: helloworld
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+        - name: aks-helloworld-argocd
+          image: lpanfilovaregistry.azurecr.io/helloworld-argocd:1.2.0
+          ports:
+            - name: http
+              containerPort: 3000
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {duration: 10s}
+      - setWeight: 40
+      - pause: {duration: 10s}
+      - setWeight: 60
+      - pause: {duration: 10s}
+      - setWeight: 80
+      - pause: {duration: 10s}
