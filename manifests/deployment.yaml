@@ -19,7 +19,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
         - name: aks-helloworld-argocd
-          image: lpanfilovaregistry.azurecr.io/helloworld-argocd:1.0.0
+          image: lpanfilovaregistry.azurecr.io/helloworld-argocd:1.1.0
           ports:
             - name: http
               containerPort: 3000
