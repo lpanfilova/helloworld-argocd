@@ -19,7 +19,18 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
         - name: aks-helloworld-argocd
-          image: lpanfilovaregistry.azurecr.io/helloworld-argocd:1.1.0
+          image: lpanfilovaregistry.azurecr.io/helloworld-argocd:1.2.0
           ports:
             - name: http
               containerPort: 3000
+   strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {duration: 10s}
+      - setWeight: 40
+      - pause: {duration: 10s}
+      - setWeight: 60
+      - pause: {duration: 10s}
+      - setWeight: 80
+      - pause: {duration: 10s}
