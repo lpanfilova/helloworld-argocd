@@ -5,7 +5,3 @@ resources:
   - service.yaml
   - namespace.yaml
 namespace: helloworld
-images:
-  - name: helloworld-argocd
-    newName: helloworld-argocd
-    newTag: v1
